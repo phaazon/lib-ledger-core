@@ -101,41 +101,30 @@ function generate_react_native_interface {
   rm -rf $RN_IOS_OBJC
   rm -rf $RN_IOS_OBJCPP
   rm -rf $RN_IOS_SOURCES
-
   rm -rf $RN_ANDROID_LIBS
 
-  for coin in $*; do
-    if [ "$coin" == "core" ]; then
-      PROJECT_NAME=ledger-core
-      RN_PKG_NAME=ledgercore
-    else
-      PROJECT_NAME=ledger-core-$coin
-      RN_PKG_NAME=ledgercore-$coin
-    fi
+  CURRENCY_NAME=$coin
 
-    CURRENCY_NAME=$coin
+  echo -e "Generating React Native binding code"
 
-    echo -e "Generating $PROJECT_NAME ($CURRENCY_NAME) React Native binding code"
-
-    ./djinni/src/run \
-      --idl $PROJECT_NAME/idl/idl.djinni \
-      --cpp-out $RN_IOS_SOURCES \
-      --cpp-namespace ledger::core::api \
-      --cpp-optional-template std::experimental::optional \
-      --cpp-optional-header "\"../utils/optional.hpp\"" \
-      --objc-type-prefix LG \
-      --objc-out $RN_IOS_OBJC \
-      --objcpp-out $RN_IOS_OBJCPP \
-      --react-native-objc-out $RN_IOS \
-      --react-native-type-prefix RCTCore \
-      --react-include-objc-impl ../objc-impl \
-      --react-native-objc-impl-suffix Impl \
-      --react-native-java-out $RN_ANDROID_JAVA_OUT \
-      --react-native-java-package com.ledger.reactnative \
-      --java-out $RN_ANDROID_JAVA_IFACE \
-      --java-package co.ledger.core \
-      --trace $trace
-  done
+  ./djinni/src/run \
+    --idl ./bundle/bundle.djinni \
+    --cpp-out $RN_IOS_SOURCES \
+    --cpp-namespace ledger::core::api \
+    --cpp-optional-template std::experimental::optional \
+    --cpp-optional-header "\"../utils/optional.hpp\"" \
+    --objc-type-prefix LG \
+    --objc-out $RN_IOS_OBJC \
+    --objcpp-out $RN_IOS_OBJCPP \
+    --react-native-objc-out $RN_IOS \
+    --react-native-type-prefix RCTCore \
+    --react-include-objc-impl ../objc-impl \
+    --react-native-objc-impl-suffix Impl \
+    --react-native-java-out $RN_ANDROID_JAVA_OUT \
+    --react-native-java-package com.ledger.reactnative \
+    --java-out $RN_ANDROID_JAVA_IFACE \
+    --java-package co.ledger.core \
+    --trace $trace
 
   # copy dynamic libraries
   CORE_LIB_x86=${BUILD_DIR}_x86/src/libledger-core.so
