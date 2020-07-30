@@ -1,27 +1,36 @@
 # Ledger Core Library
 
+<!-- vim-markdown-toc GFM -->
+
 * [Clone project](#clone-project)
 * [Dependencies](#dependencies)
-    * [Build](#build)
-    * [External dependencies:](#external-dependencies)
-* [Build of C++ library](#build-of-c-library)
-    * [Building for JNI](#building-for-jni)
-    * [Build library on docker](#build-library-on-docker)
-    * [Build library with OpenSSL](#build-library-with-openssl)
-    * [Build library with PostgreSQL](#build-library-with-postgresql)
+  * [Build](#build)
+  * [External dependencies:](#external-dependencies)
 * [Documentation](#documentation)
+* [Build of C++ library](#build-of-c-library)
+  * [CMake configuration](#cmake-configuration)
+  * [Interface generation](#interface-generation)
+  * [Compilation](#compilation)
+  * [Building for JNI](#building-for-jni)
+  * [Build library on docker](#build-library-on-docker)
+  * [Build library with OpenSSL](#build-library-with-openssl)
+  * [Build library with PostgreSQL](#build-library-with-postgresql)
+    * [Configuration in the code](#configuration-in-the-code)
+    * [Local testing](#local-testing)
 * [Binding to node.js](#binding-to-nodejs)
-    * [Using the node module](#using-the-node-module)
-    * [Generating a new node module for your system](#generating-a-new-node-module-for-your-system)
+  * [Using the node module](#using-the-node-module)
+  * [Generating a new node module for your system](#generating-a-new-node-module-for-your-system)
 * [Test NodeJs](#test-nodejs)
-* [Support](#support)
-    * [Libcore:](#libcore)
-    * [Bindings:](#bindings)
+* [Platforms support](#platforms-support)
+  * [Libcore](#libcore)
+  * [Node](#node)
 * [Developement guidelines](#developement-guidelines)
-    * [CI](#ci)
+  * [CI](#ci)
 * [Q/A and troubleshooting](#qa-and-troubleshooting)
-    * [I have updated an include file and test code doesn’t see the changes!](#i-have-updated-an-include-file-and-test-code-doesnt-see-the-changes)
-    * [I have upgraded my macOSX system and now I can’t compile anymore.](#i-have-upgraded-my-macosx-system-and-now-i-cant-compile-anymore)
+  * [I have updated an include file and test code doesn’t see the changes!](#i-have-updated-an-include-file-and-test-code-doesnt-see-the-changes)
+  * [I have upgraded my macOS system and now I can’t compile anymore.](#i-have-upgraded-my-macos-system-and-now-i-cant-compile-anymore)
+
+<!-- vim-markdown-toc -->
 
 The blockckhain Ledger Core library.
 
